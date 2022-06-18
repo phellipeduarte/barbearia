@@ -3,9 +3,7 @@ package uniacademia.phellipe.barbearia.barbearia.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -26,5 +24,4 @@ public class Usuario extends BaseEntity{
     private String senha;
 
     private boolean adm;
-
 }

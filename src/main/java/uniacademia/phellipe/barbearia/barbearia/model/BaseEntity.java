@@ -14,10 +14,4 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @CreatedDate
-    private Date dataCadastro;
-
-    @LastModifiedDate
-    private Date dataModificacao;
-
 }

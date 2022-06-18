@@ -5,12 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uniacademia.phellipe.barbearia.barbearia.DTO.CadastroUsuarioDTO;
+import uniacademia.phellipe.barbearia.barbearia.model.Agendamento;
 import uniacademia.phellipe.barbearia.barbearia.model.Usuario;
 import uniacademia.phellipe.barbearia.barbearia.service.UsuarioService;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/usuario")
 public class UsuarioResource {
 
     @Autowired
@@ -18,6 +21,11 @@ public class UsuarioResource {
 
     @GetMapping
     public String test(){ return "funcionando"; }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<Usuario>> listarUsuarios(){
+        return ResponseEntity.ok(usuarioService.listarUsuarios());
+    }
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody CadastroUsuarioDTO usuario) throws Exception {
