@@ -1,12 +1,17 @@
 package uniacademia.phellipe.barbearia.barbearia;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import uniacademia.phellipe.barbearia.barbearia.DAO.UsuarioDAO;
+import uniacademia.phellipe.barbearia.barbearia.model.Usuario;
 
 @SpringBootApplication
-public class BarbeariaApplication {
+public class BarbeariaApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BarbeariaApplication.class, args);
@@ -16,4 +21,16 @@ public class BarbeariaApplication {
 		return new ModelMapper();
 	}
 
+
+	@Autowired
+	UsuarioDAO users;
+
+	@Autowired
+	PasswordEncoder password;
+
+	@Override
+	public void run(String... args) throws Exception{
+		Usuario usuario = new Usuario("phellipe","phellipe@duarte","lipe",password.encode("123"),true);
+		users.save(usuario);
+	}
 }
