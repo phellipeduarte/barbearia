@@ -1,12 +1,17 @@
 package uniacademia.phellipe.barbearia.barbearia.service;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import uniacademia.phellipe.barbearia.barbearia.DAO.AgendamentoDAO;
+import uniacademia.phellipe.barbearia.barbearia.DAO.UsuarioDAO;
 import uniacademia.phellipe.barbearia.barbearia.DTO.AgendamentoDTO;
 import uniacademia.phellipe.barbearia.barbearia.exceptions.EmptyFieldException;
 import uniacademia.phellipe.barbearia.barbearia.model.Agendamento;
+import uniacademia.phellipe.barbearia.barbearia.model.Usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
@@ -29,11 +34,18 @@ public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
         return agendamentoDAO.findAll();
     }
 
-    public List<Agendamento> listarAgendamentosPorUsuario(String usuarioId){
+    public List<Agendamento> listarAgendamentosPorUsuario(UsuarioDAO usuarioDAO){
 
-        long id = Long.valueOf(usuarioId);
 
-        List<Agendamento> agendamentos = agendamentoDAO.findAgendamentoByUsuarioId(id);
-        return agendamentos;
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+
+        Optional<Usuario> usuario = usuarioDAO.findByUsuario(username);
+
+        if(usuario.isPresent()){
+            return agendamentoDAO.findAgendamentoByUsuarioId(usuario.get().getId());
+        }
+        return null;
     }
 }
