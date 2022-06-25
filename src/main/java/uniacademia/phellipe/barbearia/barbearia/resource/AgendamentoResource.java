@@ -35,6 +35,21 @@ public class AgendamentoResource {
         return ResponseEntity.ok(agendamentoService.listarAgendamentosPorUsuario(usuarioDAO));
     }
 
+    @GetMapping("/listar/dia")
+    public ResponseEntity<List<Agendamento>> listarAgendamentosNoDia(){
+        return ResponseEntity.ok(agendamentoService.listarAgendamentosNoDia());
+    }
+
+    @GetMapping("/listar/semana")
+    public ResponseEntity<List<Agendamento>> listarAgendamentosNaSemana(){
+        return ResponseEntity.ok(agendamentoService.listarAgendamentosNaSemana());
+    }
+
+    @GetMapping("/listar/mes")
+    public ResponseEntity<List<Agendamento>> listarAgendamentosNoMes(){
+        return ResponseEntity.ok(agendamentoService.listarAgendamentosNoMes());
+    }
+
     @PostMapping("/criar")
     public ResponseEntity<Agendamento> agendar(@RequestBody AgendamentoDTO agendamento) throws Exception{
         return ResponseEntity.status(HttpStatus.CREATED).body(agendamentoService.agendar(agendamento));

@@ -10,8 +10,11 @@ import uniacademia.phellipe.barbearia.barbearia.exceptions.EmptyFieldException;
 import uniacademia.phellipe.barbearia.barbearia.model.Agendamento;
 import uniacademia.phellipe.barbearia.barbearia.model.Usuario;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
@@ -47,5 +50,29 @@ public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
             return agendamentoDAO.findAgendamentoByUsuarioId(usuario.get().getId());
         }
         return null;
+    }
+
+    public List<Agendamento> listarAgendamentosNoDia(){
+
+        List<Agendamento> listaAgendamentos = listarAgendamentos();
+
+        return (List<Agendamento>) listaAgendamentos.stream().filter(agendamento -> agendamento.getDataAgendamento().get(
+                ChronoField.DAY_OF_YEAR) == LocalDate.now().get(ChronoField.DAY_OF_YEAR)).collect(Collectors.toList());
+    }
+
+    public List<Agendamento> listarAgendamentosNaSemana(){
+
+        List<Agendamento> listaAgendamentos = listarAgendamentos();
+
+        return (List<Agendamento>) listaAgendamentos.stream().filter(agendamento -> agendamento.getDataAgendamento().get(
+                ChronoField.ALIGNED_WEEK_OF_YEAR) == LocalDate.now().get(ChronoField.ALIGNED_WEEK_OF_YEAR)).collect(Collectors.toList());
+    }
+
+    public List<Agendamento> listarAgendamentosNoMes(){
+
+        List<Agendamento> listaAgendamentos = listarAgendamentos();
+
+        return (List<Agendamento>) listaAgendamentos.stream().filter(agendamento -> agendamento.getDataAgendamento().getMonth()
+                .equals(LocalDate.now().getMonth())).collect(Collectors.toList());
     }
 }

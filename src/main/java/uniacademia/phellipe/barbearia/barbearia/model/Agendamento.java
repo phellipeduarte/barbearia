@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import uniacademia.phellipe.barbearia.barbearia.enums.TipoCorteEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import java.util.Date;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -19,7 +20,7 @@ import javax.persistence.*;
 public class Agendamento extends BaseEntity {
 
     @Column(nullable = false)
-    private Date dataAgendamento;
+    private LocalDateTime dataAgendamento;
 
     @ManyToOne()
     private Usuario usuario;
