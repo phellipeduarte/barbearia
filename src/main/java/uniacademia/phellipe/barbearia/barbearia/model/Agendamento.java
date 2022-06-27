@@ -25,6 +25,9 @@ public class Agendamento extends BaseEntity {
     @ManyToOne()
     private Usuario usuario;
 
+    @ManyToOne()
+    private Equipe membroEquipe;
+
     @Column(nullable = false)
     private TipoCorteEnum tipoCorte;
 

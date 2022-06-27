@@ -27,6 +27,7 @@ public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
         else{
             Agendamento agendamento = new Agendamento(agendamentoDTO.getDataAgendamento(),
                     agendamentoDTO.getUsuario(),
+                    agendamentoDTO.getMembroEquipe(),
                     agendamentoDTO.getTipoCorte(),
                     agendamentoDTO.getDescricao());
             return agendamentoDAO.save(agendamento);
