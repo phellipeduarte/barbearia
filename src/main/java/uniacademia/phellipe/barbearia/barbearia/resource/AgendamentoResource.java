@@ -40,14 +40,29 @@ public class AgendamentoResource {
         return ResponseEntity.ok(agendamentoService.listarAgendamentosNoDia());
     }
 
+    @GetMapping("/contar/dia")
+    public ResponseEntity<Integer> contarAgendamentosNoDia() {
+        return ResponseEntity.ok(agendamentoService.contarAgendamentosNoDia());
+    }
+
     @GetMapping("/listar/semana")
     public ResponseEntity<List<Agendamento>> listarAgendamentosNaSemana(){
         return ResponseEntity.ok(agendamentoService.listarAgendamentosNaSemana());
     }
 
+    @GetMapping("/contar/semana")
+    public ResponseEntity<Integer> contarAgendamentosNaSemana(){
+        return ResponseEntity.ok(agendamentoService.contarAgendamentosNaSemana());
+    }
+
     @GetMapping("/listar/mes")
     public ResponseEntity<List<Agendamento>> listarAgendamentosNoMes(){
         return ResponseEntity.ok(agendamentoService.listarAgendamentosNoMes());
+    }
+
+    @GetMapping("/contar/mes")
+    public ResponseEntity<Integer> contarAgendamentosNoMes(){
+        return ResponseEntity.ok(agendamentoService.contarAgendamentosNoMes());
     }
 
     @PostMapping("/criar")

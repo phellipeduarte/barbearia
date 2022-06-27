@@ -75,4 +75,25 @@ public record AgendamentoService(AgendamentoDAO agendamentoDAO) {
         return (List<Agendamento>) listaAgendamentos.stream().filter(agendamento -> agendamento.getDataAgendamento().getMonth()
                 .equals(LocalDate.now().getMonth())).collect(Collectors.toList());
     }
+
+    public int contarAgendamentosNoDia(){
+
+        List<Agendamento> listaAgendamentosNoDia = listarAgendamentosNoDia();
+
+        return listaAgendamentosNoDia.size();
+    }
+
+    public int contarAgendamentosNaSemana(){
+
+        List<Agendamento> listaAgendamentosSemana = listarAgendamentosNaSemana();
+
+        return listaAgendamentosSemana.size();
+    }
+
+    public int contarAgendamentosNoMes(){
+
+        List<Agendamento> listaAgendamentosNoMes = listarAgendamentosNoMes();
+
+        return listaAgendamentosNoMes.size();
+    }
 }
